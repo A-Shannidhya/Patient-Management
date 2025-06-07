@@ -3,7 +3,7 @@
  *  * Copyright (c) 2025 Ayshi Shannidhya Panda
  *  * File: PatientController.java
  *  * Author: Ankit
- *  * Created on: April 23, 2025 at 01:51 pm
+ *  * Created on: June 07, 2025 at 11:26 am
  *
  *
  */
@@ -12,7 +12,7 @@
  *  * Copyright (c) 2025 Ayshi Shannidhya Panda
  *  * File: PatientController.java
  *  * Author: Ankit
- *  * Created on: April 22, 2025 at 08:20 pm
+ *  * Created on: June 07, 2025 at 11:25 am
  *
  *
  */
@@ -21,7 +21,7 @@
  *  * Copyright (c) 2025 Ayshi Shannidhya Panda
  *  * File: PatientController.java
  *  * Author: Ankit
- *  * Created on: April 22, 2025 at 08:17 pm
+ *  * Created on: June 07, 2025 at 11:25 am
  *
  *
  */
@@ -30,7 +30,7 @@
  *  * Copyright (c) 2025 Ayshi Shannidhya Panda
  *  * File: PatientController.java
  *  * Author: Ankit
- *  * Created on: April 22, 2025 at 08:16 pm
+ *  * Created on: June 07, 2025 at 11:24 am
  *
  *
  */
@@ -39,7 +39,7 @@
  *  * Copyright (c) 2025 Ayshi Shannidhya Panda
  *  * File: PatientController.java
  *  * Author: Ankit
- *  * Created on: April 21, 2025 at 01:52 pm
+ *  * Created on: June 07, 2025 at 11:21 am
  *
  *
  */
@@ -48,20 +48,21 @@
  *  * Copyright (c) 2025 Ayshi Shannidhya Panda
  *  * File: PatientController.java
  *  * Author: Ankit
- *  * Created on: April 21, 2025 at 01:52 pm
+ *  * Created on: June 07, 2025 at 09:44 am
  *
  *
  */
 /*
+ * Copyright (c) 2025 Ayshi Shannidhya Panda. All rights reserved.
  *
- *  * Copyright (c) ${YEAR} Ayshi Shannidhya Panda
- *  * File: ${NAME}
- *  * Author: ${USER}
- *  * Created on: ${DATE} at ${TIME}
+ * This source code is confidential and intended solely for internal use.
+ * Unauthorized copying, modification, distribution, or disclosure of this
+ * file, via any medium, is strictly prohibited.
  *
- *
+ * Project: Patient Management
+ * Author: Ayshi Shannidhya Panda
+ * Created on: 2025-6-7
  */
-
 package com.ankit.patientservice.Controller;
 
 import com.ankit.patientservice.DTO.PatientRequestDTO;
