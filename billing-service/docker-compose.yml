@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-patientdb
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ankit
+      POSTGRES_DB: Patient_Management
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
+  billing-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: billing-service
+    depends_on:
+      - postgres
+    environment:
+      SPRING_APPLICATION_NAME: billing-service
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/Patient_Management
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ankit
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_SQL_INIT_MODE: never
+      GRPC_SERVER_PORT: 9001
+      SERVER_PORT: 8001
+      LOGGING_LEVEL_ROOT: info
+      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK: debug
+      LOGGING_LEVEL_ORG_HIBERNATE: debug
+    ports:
+      - "8001:8001"
+      - "9001:9001"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
