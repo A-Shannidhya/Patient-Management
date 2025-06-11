@@ -15,6 +15,7 @@ A simple RESTful Patient Management System built with Spring Boot and JPA. This 
 - **JPA (Hibernate)**: Enables reliable database operations through JPA repositories.
 - **Kafka Integration**: Utilizes Apache Kafka for event-driven communication. CRUD actions on patients can produce events to Kafka topics, supporting scalable and decoupled microservices architectures.
 - **gRPC Support**: Implements gRPC endpoints for high-performance, language-agnostic remote procedure calls, allowing other services to interact with the patient management system efficiently.
+- **Billing Module**: Supports basic patient billing operations, including bill generation and payment status tracking.
 
 ---
 
@@ -29,12 +30,14 @@ All endpoints are prefixed with `/patients`:
 | PUT    | `/{id}`          | Update a patient by ID      |
 | DELETE | `/{id}`          | Delete a patient by ID      |
 
+Billing-related endpoints are available for managing patient billing (e.g. create bill, get billing history, update payment status).
+
 ---
 
 ## Event Streaming & RPC
 
-- **Kafka Events**: When patient records are created, updated, or deleted, relevant events are published to Kafka topics. This supports real-time updates, integration with other systems, and audit trails.
-- **gRPC Services**: Exposes core patient management actions (CRUD) via gRPC endpoints for efficient inter-service communication in distributed environments.
+- **Kafka Events**: When patient records or billing operations are created, updated, or deleted, relevant events are published to Kafka topics. This supports real-time updates, integration with other systems, and audit trails.
+- **gRPC Services**: Exposes core patient management and billing actions (CRUD and billing operations) via gRPC endpoints for efficient inter-service communication in distributed environments.
 
 ---
 
