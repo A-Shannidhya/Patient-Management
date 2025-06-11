@@ -3,8 +3,8 @@ POST http://localhost:8000/patients/create
 Content-Type: application/json
 
 {
-  "name": "abhilash",
-  "email": "hello123@gmail.com",
+  "name": "abhilash with billing",
+  "email": "hellodtresff3@gmail.com",
   "address": "helllo 2435 gu",
   "dateOfBirth": "2005-01-09",
   "registeredDate": "2025-04-03"

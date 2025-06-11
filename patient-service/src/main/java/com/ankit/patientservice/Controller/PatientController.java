@@ -3,7 +3,7 @@
  *  * Copyright (c) 2025 Ayshi Shannidhya Panda
  *  * File: PatientController.java
  *  * Author: Ankit
- *  * Created on: June 07, 2025 at 11:26 am
+ *  * Created on: June 10, 2025 at 10:42 pm
  *
  *
  */
@@ -12,43 +12,7 @@
  *  * Copyright (c) 2025 Ayshi Shannidhya Panda
  *  * File: PatientController.java
  *  * Author: Ankit
- *  * Created on: June 07, 2025 at 11:25 am
- *
- *
- */
-/*
- *
- *  * Copyright (c) 2025 Ayshi Shannidhya Panda
- *  * File: PatientController.java
- *  * Author: Ankit
- *  * Created on: June 07, 2025 at 11:25 am
- *
- *
- */
-/*
- *
- *  * Copyright (c) 2025 Ayshi Shannidhya Panda
- *  * File: PatientController.java
- *  * Author: Ankit
- *  * Created on: June 07, 2025 at 11:24 am
- *
- *
- */
-/*
- *
- *  * Copyright (c) 2025 Ayshi Shannidhya Panda
- *  * File: PatientController.java
- *  * Author: Ankit
- *  * Created on: June 07, 2025 at 11:21 am
- *
- *
- */
-/*
- *
- *  * Copyright (c) 2025 Ayshi Shannidhya Panda
- *  * File: PatientController.java
- *  * Author: Ankit
- *  * Created on: June 07, 2025 at 09:44 am
+ *  * Created on: June 10, 2025 at 10:41 pm
  *
  *
  */
@@ -61,7 +25,7 @@
  *
  * Project: Patient Management
  * Author: Ayshi Shannidhya Panda
- * Created on: 2025-6-7
+ * Created on: 2025-6-8
  */
 package com.ankit.patientservice.Controller;
 

@@ -20,7 +20,7 @@ import net.devh.boot.grpc.server.service.GrpcService;
 
 @Slf4j
 @GrpcService
-public class BillingGrpcService extends BillingServiceImplBase {
+public class BillingServiceGrpc extends BillingServiceImplBase {
 
     @Override
     public void createBillingAccount(billing.BillingRequest billingRequest,
