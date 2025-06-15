@@ -1,13 +1,14 @@
 ###
-POST http://localhost:8000/patients/create
+POST http://localhost:8781/patients/create
 Content-Type: application/json
 
 {
-  "name": "abhilash with billing",
-  "email": "hellodtresff3@gmail.com",
-  "address": "helllo 2435 gu",
+  "name": "abhilash",
+  "email": "somethtn2@gmail.com",
+  "address": "123, Kafka Town",
   "dateOfBirth": "2005-01-09",
   "registeredDate": "2025-04-03"
 }
+
 
 ###

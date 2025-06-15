@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    networks:
+      - internal
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    ports:
+      - "9092:9092"
+      - "9094:9094"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,EXTERNAL://0.0.0.0:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+    depends_on:
+      - zookeeper
+    networks:
+      - internal
+
+  patient-service-db:
+    image: postgres:16
+    container_name: patient-service-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: Patient_Management
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ankit
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+  analytics-service:
+    build:
+      context: ./analytics-service
+      dockerfile: Dockerfile
+    container_name: analytics-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      kafka:
+        condition: service_started
+      patient-service-db:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: analytics-service
+      SPRING_DATASOURCE_URL: jdbc:postgresql://patient-service-db:5432/Patient_Management
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ankit
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
