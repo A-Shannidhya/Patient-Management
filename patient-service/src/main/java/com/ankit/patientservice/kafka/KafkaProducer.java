@@ -7,7 +7,7 @@
  *
  * Project: Patient Management
  * Author: Ayshi Shannidhya Panda
- * Created on: 2025-6-14
+ * Created on: 2025-6-15
  */
 
 package com.ankit.patientservice.kafka;
@@ -20,14 +20,14 @@ import org.springframework.stereotype.Service;
 import patient.events.PatientEvent;
 
 @Service
-public class kafkaProducer {
+public class KafkaProducer {
 
-    private static final Logger log = LoggerFactory.getLogger(kafkaProducer.class);
+    private static final Logger log = LoggerFactory.getLogger(KafkaProducer.class);
     private static final String TOPIC = "patient";
 
     private final KafkaTemplate<String, byte[]> kafkaTemplate;
 
-    public kafkaProducer(KafkaTemplate<String, byte[]> kafkaTemplate) {
+    public KafkaProducer(KafkaTemplate<String, byte[]> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 

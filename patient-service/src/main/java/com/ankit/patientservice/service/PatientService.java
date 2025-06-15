@@ -7,7 +7,7 @@
  *
  * Project: Patient Management
  * Author: Ayshi Shannidhya Panda
- * Created on: 2025-6-12
+ * Created on: 2025-6-15
  */
 
 package com.ankit.patientservice.service;
@@ -17,7 +17,7 @@ import com.ankit.patientservice.DTO.PatientResponseDTO;
 import com.ankit.patientservice.exception.EmailAlreadyExistsException;
 import com.ankit.patientservice.exception.PatientNotFoundException;
 import com.ankit.patientservice.grpc.BillingServiceGrpcClient;
-import com.ankit.patientservice.kafka.kafkaProducer;
+import com.ankit.patientservice.kafka.KafkaProducer;
 import com.ankit.patientservice.mapper.PatientMapper;
 import com.ankit.patientservice.model.Patient;
 import com.ankit.patientservice.repository.PatientRepository;
@@ -37,12 +37,12 @@ public class PatientService {
 
     private final BillingServiceGrpcClient billingServiceGrpcClient;
     private final PatientRepository patientRepository;
-    private final kafkaProducer kafkaProducer;
+    private final KafkaProducer kafkaProducer;
 
     @Autowired
     public PatientService(PatientRepository patientRepository,
                           BillingServiceGrpcClient billingServiceGrpcClient,
-                          kafkaProducer kafkaProducer) {
+                          KafkaProducer kafkaProducer) {
         this.patientRepository = patientRepository;
         this.billingServiceGrpcClient = billingServiceGrpcClient;
         this.kafkaProducer = kafkaProducer;

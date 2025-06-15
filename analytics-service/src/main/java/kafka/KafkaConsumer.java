@@ -7,7 +7,7 @@
  *
  * Project: Patient Management
  * Author: Ayshi Shannidhya Panda
- * Created on: 2025-6-14
+ * Created on: 2025-6-15
  */
 
 package kafka;
@@ -25,12 +25,38 @@ public class KafkaConsumer {
     private static final Logger log = LoggerFactory.getLogger(KafkaConsumer.class);
 
     @KafkaListener(topics = "patient", groupId = "analytics-service")
-    public void consume(byte[] event) {
+    public void consume(byte[] messageBytes) {
         try {
-            PatientEvent patientEvent = PatientEvent.parseFrom(event);
-            log.info("Received PatientEvent: {}", patientEvent);
+            // Debug raw bytes
+            log.debug("Received raw bytes (hex): {}", bytesToHex(messageBytes));
+
+            // Parse Protobuf message
+            PatientEvent patientEvent = PatientEvent.parseFrom(messageBytes);
+
+            // Log event details
+            log.info("🩺 Patient event consumed:");
+            log.info("➡️ ID: {}", patientEvent.getPatientId());
+            log.info("➡️ Name: {}", patientEvent.getName());
+            log.info("➡️ Email: {}", patientEvent.getEmail());
+            log.info("➡️ Event Type: {}", patientEvent.getEventType());
+
+            log.info("✅ Successfully parsed PatientEvent: {}", patientEvent);
+
+            // TODO: Add DB persistence or analytics logic here
+
         } catch (InvalidProtocolBufferException e) {
-            log.error("Failed to parse PatientEvent from Kafka message", e);
+            log.error("❌ Invalid Protobuf format for PatientEvent", e);
+        } catch (Exception e) {
+            log.error("❌ Unexpected error while consuming message", e);
         }
+    }
+
+    // Utility method to convert byte[] to hex
+    private String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02X ", b));
+        }
+        return sb.toString().trim();
     }
 }

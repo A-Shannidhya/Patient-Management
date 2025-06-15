@@ -1,22 +1,4 @@
 /*
- *
- *  * Copyright (c) 2025 Ayshi Shannidhya Panda
- *  * File: PatientController.java
- *  * Author: Ankit
- *  * Created on: June 10, 2025 at 10:42 pm
- *
- *
- */
-/*
- *
- *  * Copyright (c) 2025 Ayshi Shannidhya Panda
- *  * File: PatientController.java
- *  * Author: Ankit
- *  * Created on: June 10, 2025 at 10:41 pm
- *
- *
- */
-/*
  * Copyright (c) 2025 Ayshi Shannidhya Panda. All rights reserved.
  *
  * This source code is confidential and intended solely for internal use.
@@ -25,8 +7,9 @@
  *
  * Project: Patient Management
  * Author: Ayshi Shannidhya Panda
- * Created on: 2025-6-8
+ * Created on: 2025-6-15
  */
+
 package com.ankit.patientservice.Controller;
 
 import com.ankit.patientservice.DTO.PatientRequestDTO;
@@ -35,7 +18,7 @@ import com.ankit.patientservice.DTO.validators.CreatePatientValidationGroup;
 import com.ankit.patientservice.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.Builder;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -49,44 +32,43 @@ import java.util.UUID;
 @Tag(name = "Patient Controller", description = "API for managing Patients")
 public class PatientController {
 
-    private PatientService patientService;
+    private final PatientService patientService;
 
     @Autowired
-    public void setPatientService(PatientService patientService) {
+    public PatientController(PatientService patientService) {
         this.patientService = patientService;
     }
 
     @GetMapping("/get")
     @Operation(summary = "Get all patients")
-    public ResponseEntity<List<PatientResponseDTO>> getPatient() {
-
-        List<PatientResponseDTO> patientResponseDTOS = patientService.getPatient();
-        return ResponseEntity.ok().body(patientResponseDTOS);
+    public ResponseEntity<List<PatientResponseDTO>> getAllPatients() {
+        List<PatientResponseDTO> patients = patientService.getPatient();
+        return ResponseEntity.ok(patients);
     }
 
     @PostMapping("/create")
-    @Operation(summary = "Create a patient")
-    public ResponseEntity<PatientResponseDTO> createPatient(@Validated({Builder.Default.class, CreatePatientValidationGroup.class}) @RequestBody PatientRequestDTO patientRequestDTO) {
-        PatientResponseDTO patientResponseDTO = patientService.createPatient(patientRequestDTO);
+    @Operation(summary = "Create a new patient")
+    public ResponseEntity<PatientResponseDTO> createPatient(
+            @Validated(CreatePatientValidationGroup.class) @RequestBody PatientRequestDTO patientRequestDTO) {
 
-        return ResponseEntity.ok().body(patientResponseDTO);
+        PatientResponseDTO createdPatient = patientService.createPatient(patientRequestDTO);
+        return ResponseEntity.ok(createdPatient);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update a patient")
-    public ResponseEntity<PatientResponseDTO> updatePatient(@PathVariable UUID id,
-                                                            @Validated({Builder.Default.class}) @RequestBody PatientRequestDTO patientRequestDTO) {
-        PatientResponseDTO patientResponseDTO = patientService.updatePatient(id,
-                patientRequestDTO);
+    @Operation(summary = "Update a patient by ID")
+    public ResponseEntity<PatientResponseDTO> updatePatient(
+            @PathVariable UUID id,
+            @Valid @RequestBody PatientRequestDTO patientRequestDTO) {
 
-        return ResponseEntity.ok().body(patientResponseDTO);
+        PatientResponseDTO updatedPatient = patientService.updatePatient(id, patientRequestDTO);
+        return ResponseEntity.ok(updatedPatient);
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a patient")
+    @Operation(summary = "Delete a patient by ID")
     public ResponseEntity<Void> deletePatient(@PathVariable UUID id) {
         patientService.deletePatient(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
-
 }
